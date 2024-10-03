@@ -3,7 +3,7 @@ const comment = require('../models/comment');
 const authenticate = require('../../middleware/authenticate');
 
 class CommentController{
-
+    //[POST] /:id/add
    async addComment(req,res) { 
         try{
 
@@ -32,6 +32,7 @@ class CommentController{
         }
    }
 
+   //[Get] /:id/get
    async getComment(req,res) {
         try{
             const Comments = await comment.find({ eventId: req.params.id }).populate('userId', 'name');
