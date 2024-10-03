@@ -9,5 +9,7 @@ router.post('/:id/join', authenticate, eventController.join);
 router.post('/:id/Unjoin', authenticate, eventController.Unjoin);
 router.put('/:id/edit', authenticate, eventController.checkEventHost, eventController.editEvent);
 router.delete('/:id/cancel', authenticate, eventController.checkEventHost, eventController.cancelEvent);
+router.get('/:id/get', eventController.getEvent);
+
 
 module.exports = router;
