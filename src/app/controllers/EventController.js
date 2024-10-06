@@ -7,17 +7,6 @@ const upload = require('../../config/upload');
 const authenticate = require('../../middleware/authenticate');
 
 class EventController {
-
-    //[Get] /:id/get
-   async getEvent(req,res) {
-    try{
-        const Event = await event.findOne({ _id: req.params.id });
-        res.status(200).json(Event);
-    } catch (error) {
-        res.status(500).json({ message: 'Lỗi hệ thống lấy sự kiện!' });
-    }
-}
-
     //[POST] /create
     async create(req, res){
         try{
