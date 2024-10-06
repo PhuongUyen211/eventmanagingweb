@@ -25,7 +25,7 @@ class SignController {
                     return res.status(400).json({ message: 'Tên, email và mật khẩu không thể để trống!' });
                 }
 
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+                const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
                 if ( !re.test(String(email).toLowerCase()) ) {
                     res.status(400).json({ message: 'Email không hợp lệ. Vui lòng nhập đúng định dạng email.' });
@@ -70,7 +70,7 @@ class SignController {
             }
 
            
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;  
 
             if ( !re.test(String(email).toLowerCase()) ) {
                 res.status(400).json({ message: 'Email không hợp lệ. Vui lòng nhập đúng định dạng email.' });
@@ -105,7 +105,7 @@ class SignController {
                 res.status(400).json({ message: 'Email không thể để trống!' });
             }
            
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
             if ( !re.test(String(email).toLowerCase()) ) {
                 res.status(400).json({ message: 'Email không hợp lệ. Vui lòng nhập đúng định dạng email.' });
