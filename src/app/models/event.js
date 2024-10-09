@@ -6,7 +6,7 @@ const event = new Schema({
     description: { type: String },
     address: {type: String, required: true },
     topic: {type: String},
-    host: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
+    host: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true},
     date: {type: Date, required: true},
     image: { data: Buffer, contentType: String },
 }, {
