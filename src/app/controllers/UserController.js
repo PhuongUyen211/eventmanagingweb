@@ -46,6 +46,13 @@ class UserController {
                         });
                 }
 
+                let existingUser = await user.findOne({ email: email });
+                if (existingUser._id != currentUser._id ) {
+                    return res
+                        .status(400)
+                        .json({ message: 'Email người sử dụng đã tồn tại!' });
+                }
+
                 const updateData = {
                     name,
                     email,

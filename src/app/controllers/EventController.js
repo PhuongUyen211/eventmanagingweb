@@ -212,6 +212,17 @@ class EventController {
                         });
                 }
 
+                const re = /^[a-zA-Z0-9\s]+$/; // Chỉ cho phép chữ cái, số và khoảng trắng
+
+                if (!re.test(name)) {
+                    return res
+                        .status(400)
+                        .json({
+                            message:
+                                'Tên sự kiện không hợp lệ. Vui lòng không sử dụng ký tự đặc biệt.',
+                        });
+                }
+
                 const updateData = {
                     name,
                     description,
