@@ -1,10 +1,24 @@
+//công cụ để làm việc với đường dẫn file 
+//và thư mục trong hệ thống tệp
 const path = require('path');
+
 const express = require('express');
+
+//theo dõi và ghi lại hoạt động
 const morgan = require('morgan');
+
+//ghi de phuong thuc HTTP
 methodOverride = require('method-override');
+
 const { engine } = require('express-handlebars');
+
+//ma hoa mat khau
 const bcrypt = require('bcryptjs');
+
+//tao va xac thuc json web token
 const jwt = require('jsonwebtoken');
+
+//xu ly tai tep tin, anh
 const multer = require('multer');
 const nodemailer = require('nodemailer');
 
@@ -20,7 +34,7 @@ db.connect();
 
 //app.use(express.static(path.join(__dirname, 'public')));
 
-//middleware xu ly form data
+//middleware xu ly du lieu giup co the truy cap du lieu bang req.body
 app.use(
     express.urlencoded({
         extended: true,
@@ -34,18 +48,18 @@ app.use(methodOverride('_method'));
 app.use(morgan('combined'));
 
 //Template engine
-app.engine(
-    'hbs',
-    engine({
-        extname: '.hbs',
-        helpers: {
-            sum: (a, b) => a + b,
-        },
-    }),
-);
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources', 'views'));
-// console.log('Views directory:', path.join(__dirname, 'resources/views'));
+// app.engine(
+//     'hbs',
+//     engine({
+//         extname: '.hbs',
+//         helpers: {
+//             sum: (a, b) => a + b,
+//         },
+//     }),
+// );
+// app.set('view engine', 'hbs');
+// app.set('views', path.join(__dirname, 'resources', 'views'));
+// // console.log('Views directory:', path.join(__dirname, 'resources/views'));
 
 //route init
 route(app);
