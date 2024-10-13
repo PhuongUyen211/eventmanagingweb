@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'hello_world_2112205'; 
+const JWT_SECRET = 'hello_world_2112205';
 
 const authenticate = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'Không có quyền truy cập hoặc chưa đăng nhập.' });
+        return res
+            .status(401)
+            .json({ message: 'Không có quyền truy cập hoặc chưa đăng nhập.' });
     }
 
     const token = authHeader.split(' ')[1];

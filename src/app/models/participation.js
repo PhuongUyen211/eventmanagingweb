@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ParticipationSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true },
+const participation = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
+    eventId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'event',
+        required: true,
+    },
 });
 
-module.exports = mongoose.model('Participation', ParticipationSchema);
+module.exports = mongoose.model('participation', participation);

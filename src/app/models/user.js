@@ -5,13 +5,13 @@ const bcrypt = require('bcryptjs');
 
 const user = new Schema(
     {
-        name: { type: String, required: true},
+        name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         bio: { type: String },
         avatar: { data: Buffer, contentType: String },
-        resetToken: {type: String},
-        resetTokenExpire: {type: Date},
+        resetToken: { type: String },
+        resetTokenExpire: { type: Date },
     },
     {
         timestamps: true,
@@ -33,4 +33,4 @@ user.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-module.exports = mongoose.model('User', user);
+module.exports = mongoose.model('user', user);

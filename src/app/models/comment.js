@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     eventId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Event', // Liên kết với mô hình sự kiện
+        ref: 'event', // Liên kết với mô hình sự kiện
         required: true,
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Liên kết với mô hình người dùng
+        ref: 'user', // Liên kết với mô hình người dùng
         required: true,
     },
     content: {
@@ -24,6 +24,6 @@ const commentSchema = new Schema({
     },
 });
 
-const Comment = mongoose.model('Comment', commentSchema);
+const Comment = mongoose.model('comment', commentSchema);
 
 module.exports = Comment;

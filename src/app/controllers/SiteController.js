@@ -5,16 +5,16 @@ class SiteController {
         console.log('Hello');
     }
 
-    async getUserNotification(req, res){
+    async getUserNotification(req, res) {
         try {
-            const Notifications = await notification.find({ userId: req.user.id }).sort({ createdAt: -1 });
+            const Notifications = await notification
+                .find({ userId: req.user.id })
+                .sort({ createdAt: -1 });
             res.json(Notifications);
         } catch (error) {
             res.status(500).json({ message: 'Lỗi hệ thống!' });
         }
     }
-
-
 }
 
 module.exports = new SiteController();
