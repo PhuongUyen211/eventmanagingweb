@@ -200,6 +200,21 @@ class EventController {
                         .status(404)
                         .json({ message: 'Event không tồn tại' });
                 }
+
+                const currentDate = new Date();
+                const eventCreateDate = new Date(currentEvent.createdAt); // Giả sử 'date' là trường lưu trữ ngày bắt đầu sự kiện
+                const timeDifference = currentDate - eventCreateDate;
+                const days = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+                //Kiem tra dieu kien chinh sua
+                if (days >= 7) {
+                    return res
+                        .status(400)
+                        .json({
+                            message: 'Bạn không thể chỉnh sửa sự kiện sau 7 ngày tạo!',
+                        });
+                }
+
                 
                 const { name, description, address, topic } = req.body;
 
@@ -223,6 +238,7 @@ class EventController {
                         });
                 }
 
+            
                 const updateData = {
                     name,
                     description,
@@ -337,8 +353,20 @@ class EventController {
                 });
         }
 
+            // Chuyển đổi startDate và endDate thành đối tượng Date
+        let startDateObj = startDate ? new Date(startDate) : null;
+        let endDateObj = endDate ? new Date(endDate) : null;
+
+        // Kiểm tra nếu cả startDate và endDate đều tồn tại và so sánh chúng
+        if (startDateObj && endDateObj && startDateObj > endDateObj) {
+            return res.status(400).json({
+                error: 'Ngày kết thúc không được nhỏ hơn ngày bắt đầu',
+            });
+        }
+
+        // Thêm các điều kiện tìm kiếm nếu có
         if (name) {
-            query.name = { $regex: name, $options: 'i' }; // Tìm kiếm không phân biệt chữ hoa chữ thường
+            query.name = { $regex: name, $options: 'i' }; // Tìm kiếm không phân biệt hoa thường
         }
         if (address) {
             query.address = { $regex: address, $options: 'i' };
@@ -346,8 +374,12 @@ class EventController {
         if (topic) {
             query.topic = { $regex: topic, $options: 'i' };
         }
-        if (startDate && endDate) {
-            query.date = { $gte: new Date(startDate), $lte: new Date(endDate) };
+        if (startDateObj && endDateObj) {
+            query.date = { $gte: startDateObj, $lte: endDateObj }; // Tìm kiếm sự kiện trong khoảng thời gian
+        } else if (startDateObj) {
+            query.date = { $gte: startDateObj }; // Tìm kiếm sự kiện bắt đầu từ startDate trở về sau
+        } else if (endDateObj) {
+            query.date = { $lte: endDateObj }; // Tìm kiếm sự kiện kết thúc trước hoặc bằng endDate
         }
 
         try {
